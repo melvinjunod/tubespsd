@@ -44,7 +44,7 @@ with st.sidebar.expander('Informasi lebih'):
     st.write('AirBnB adalah suatu perusahaan yang memberikan suatu pasar untuk menjual dan membeli layanan Bed (tempat untuk tidur sementara) and Breakfast (sarapan). Suatu lokasi AirBnB adalah lokasi yang menjual layanan Bed and Breakfast di platform AirBnB.')
 
     st.markdown('### Source Code')
-    st.write('Kode ini ada di GitHub: <link>.\n Kode yang digunakan untuk memproses data ada di Google Colab: <link>')
+    st.write('Kode ini ada di GitHub: https://github.com/melvinjunod/tubespsd .\n Kode yang digunakan untuk memproses data ada di Google Colab: https://colab.research.google.com/drive/101UzOswS1T0H2O6Utg7lVOxIXiide442?usp=sharing')
 
     st.markdown('### Sumber Data')
     st.write('Data ini berasal dari "Airbnb Cleaned Europe Dataset" yang tersedia di: https://www.kaggle.com/datasets/dipeshkhemani/airbnb-cleaned-europe-dataset')
