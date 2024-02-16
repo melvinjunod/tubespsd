@@ -1,0 +1,20 @@
+Library yang dipakai di notebook:
+
+numpy
+pandas
+matplotlib
+plotly
+gdown
+seaborn
+geopy
+
+Library yang dipakai di aplikasi Streamlit:
+
+streamlit
+pandas
+numpy
+altair
+matplotlib
+folium
+seaborn
+streamlit_folium
