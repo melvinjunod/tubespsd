@@ -1,17 +1,24 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import altair as alt
-# import plotly.express as px
-# import geopandas as gpd
 import matplotlib
 import matplotlib.pyplot as plt
 import folium
 import seaborn as sns
 from streamlit_folium import folium_static
 
+#Konfigurasi style
+
 matplotlib.rcParams['text.color'] = 'white'
 plt.style.use('dark_background')
+
+#Konfigurasi url data
+url_main_data = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/airbnb_processed.csv"
+url_city_coordinates = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/city_coordinates.csv"
+url_analysis1 = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/analysis1.csv"
+url_analysis2 = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/analysis2.csv"
+url_price_features = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/price_features.csv"
+url_satisfaction_features = "https://raw.githubusercontent.com/melvinjunod/tubespsd/main/satisfaction_features.csv"
 
 # Konfigurasi halaman
 
@@ -62,7 +69,7 @@ def merge_data_with_coordinates(dataframe):
     merged_data = pd.merge(dataframe, city_coordinates, on='City', how='left')
     return merged_data
 
-city_coordinates = pd.read_csv('city_coordinates.csv')
+city_coordinates = pd.read_csv(url_city_coordinates)
 starting_city = city_coordinates.iloc[8]  #Vienna
 starting_zoom = 3
 
@@ -89,7 +96,7 @@ def get_dot_color(ratio, min_color, max_color):
 
 # Display the map 
 if data_to_display == analyses[0]:
-    df1 = pd.read_csv('analysis1.csv')
+    df1 = pd.read_csv(url_analysis1)
     df1_merged = merge_data_with_coordinates(df1)
     map1 = folium.Map(location=[starting_city['Latitude'], starting_city['Longitude']], zoom_start=starting_zoom)
 
@@ -111,7 +118,7 @@ if data_to_display == analyses[0]:
     folium_static(map1)
 
 elif data_to_display == analyses[1]:
-    df2 = pd.read_csv('analysis2.csv')
+    df2 = pd.read_csv(url_analysis2)
     df2_merged = merge_data_with_coordinates(df2)
     map2 = folium.Map(location=[starting_city['Latitude'], starting_city['Longitude']], zoom_start=starting_zoom)
 
@@ -135,7 +142,8 @@ elif data_to_display == analyses[1]:
 elif data_to_display == analyses[2]:
     st.subheader('Dampak setiap fitur lokasi AirBnB terhadap kepuasan pelanggan')
     st.write("Analisis oleh Ryan Bachtiar (10122097)")
-    df3 = pd.read_csv('satisfaction_features.csv',header=None)
+    st.write("Perhitungan dilakukan menggunakan machine learning (Random Forest Regressor)")
+    df3 = pd.read_csv(url_satisfaction_features,header=None)
     
     fig3, ax3 = plt.subplots()
     bar_colors = ['#6e7cff', '#e79c65', '#f4d231', '#dcdcdc', '#b42121', '#49f432', '#76fea2', '#f868f0']
@@ -146,7 +154,8 @@ elif data_to_display == analyses[2]:
 elif data_to_display == analyses[3]:
     st.subheader('Dampak setiap fitur lokasi AirBnB terhadap harga lokasi AirBnB')
     st.write("Analisis oleh Dyan Wiliandri (10122085)")
-    df4 = pd.read_csv('price_features.csv',header=None)
+    st.write("Perhitungan dilakukan menggunakan machine learning (Random Forest Regressor)")
+    df4 = pd.read_csv(url_price_features,header=None)
     
     fig4, ax4 = plt.subplots()
     bar_colors = ['#6e7cff', '#e79c65', '#f4d231', '#dcdcdc', '#b42121', '#49f432', '#76fea2', '#f868f0']
@@ -158,7 +167,7 @@ elif data_to_display == analyses[3]:
 elif data_to_display == analyses[4]:
     st.subheader('Visualisasi perbedaan harga berdasarkan jenis ruangan')
     st.write("Analisis oleh Muhlas Putra Siswaji (10122092)")
-    df5 = pd.read_csv('airbnb_processed.csv')
+    df5 = pd.read_csv(url_main_data)
     # Membuat plot
     fig5 = plt.figure(figsize=(3, 3))
     ax5 = sns.boxplot(df5, y=df5['Room Type'], x=df5['Price'], hue=df5['Room Type'], palette="muted")
